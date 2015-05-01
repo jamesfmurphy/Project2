@@ -1,0 +1,14 @@
+#chat{
+	height:350px;
+	overflow-y: scroll;
+}
+#contentWrap{
+	display: none;
+}
+#chatWrap{
+	float: left;
+	border: 1px #000 solid;
+}
+#chat {
+	margin: 5px;
+}
