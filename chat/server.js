@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=dOSIqJWQkXM
+
 var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
@@ -24,8 +26,13 @@ io.sockets.on('connection', function(socket){
 		}
 	});
 
+	socket.on('user color', function(color) {
+		socket.usercolor = color;
+
+	});
+
 	socket.on('send message', function(data){
-		io.sockets.emit('new message', {message: data, chatname: socket.chatname});
+		io.sockets.emit('new message', {message: data, chatname: socket.chatname, look: socket.usercolor});
 	});
 	
 	socket.on('disconnect', function(data){

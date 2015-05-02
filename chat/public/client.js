@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=dOSIqJWQkXM
+
 var main = function (data) {
 
 	var socket = io.connect();
@@ -8,6 +10,13 @@ var main = function (data) {
 	var $messageForm = $('#send-message');
 	var $messageBox = $('#message');
 	var $chat = $('#chat');
+
+    var randomColor = "";
+    var library ="abcdef1234567890";
+    for(var i = 0; i < 6; i++)
+    {
+  		randomColor += library.charAt(Math.floor(Math.random()* library.length));
+    }
 			
 	$nickForm.submit(function(e){
 		e.preventDefault();
@@ -21,6 +30,8 @@ var main = function (data) {
 		});
 		$nickBox.val('');
 	});
+
+	socket.emit('user color', randomColor);
 			
 	socket.on('usernames', function(data){
 		var html = '';
@@ -37,7 +48,7 @@ var main = function (data) {
 	});
 			
 	socket.on('new message', function(data){
-		$chat.append('<b>' + data.chatname + ': </b>' + data.message + "<br/>");
+		$chat.append('<b style="color: #' + data.look + '";>' + data.chatname + ': </b>' + data.message + "<br/>");
 	});
 };
 
